@@ -1,0 +1,214 @@
+# Critique and Refine Prompt Pool Configuration
+# This YAML file defines all templates used in the critique and refinement process
+
+# Base prompt templates
+base_templates:
+  final_prompt: ""  # This will be populated with the final optimized prompt
+  eval_prompt: ""   # Used for evaluation
+  system_prompt: |
+    You are an expert prompt engineer with deep knowledge of language models and their capabilities.
+
+# Critique and refinement specific templates
+core_templates:
+  quest_reason_ans: |
+    [Question] {question}
+    [Answer] {answer}
+  expert_profile: |
+    You are an expert prompt engineer with experience in optimizing prompts for language models.
+  ans_delimiter_instruction: |
+    Wrap your final answer between <ANS_START> and <ANS_END> tags.
+
+# Thinking styles for generating prompt variations
+thinking_styles:
+  - |
+    Think like a mathematician, focusing on logical reasoning and step-by-step problem solving.
+  - |
+    Think like a teacher explaining concepts to a student who is learning the material for the first time.
+  - |
+    Think like a scientist, using empirical evidence and hypothesis testing to arrive at conclusions.
+  - |
+    Think like a software engineer, emphasizing clean architecture, modular design, coding best practices, and iterative development to build robust solutions.
+  - |
+    Think like a software tester, prioritizing systematic validation, coverage of edge cases, risk-based testing, and verification that the final product meets user requirements.
+  - |
+    Think like an AI engineer, adopting a data-driven mindset, selecting suitable machine learning models, optimizing model performance, and continuously refining algorithms based on feedback loops.
+  - |
+    Think like an insurance actuary, focusing on risk analysis, statistical modeling, financial projections, and maintaining data-backed decision-making in uncertain conditions.
+
+# Templates for critique and refinement
+critique_templates:
+  meta_critique_template: |
+    I'll show you a prompt instruction and some examples where the prompt didn't work well.
+    Please critique the prompt and suggest how it could be improved.
+    
+    Prompt instruction:
+    {instruction}
+    
+    Examples where this prompt didn't work well:
+    {examples}
+    
+    Please provide a detailed critique of why this prompt might not be effective for these examples.
+
+  meta_positive_critique_template: |
+    I'll show you a prompt instruction and some examples where the prompt worked well.
+    Please analyze what makes this prompt effective and suggest how it could be further improved.
+    
+    Prompt instruction:
+    {instruction}
+    
+    Examples where this prompt worked well:
+    {examples}
+    
+    Please provide a detailed analysis of why this prompt is effective for these examples and how it could be further enhanced.
+
+  critique_refine_template: |
+    I'll show you a prompt instruction, some examples, and a critique of the prompt.
+    Please refine the prompt based on the critique to make it more effective.
+    
+    Original prompt:
+    {instruction}
+    
+    Examples:
+    {examples}
+    
+    Critique:
+    {critique}
+    
+    Please provide a refined version of the prompt between <START> and <END> tags.
+    Aim to address all the issues mentioned in the critique while keeping the prompt concise and clear.
+    You should take {steps_per_sample} steps per sample to arrive at the answer.
+
+# Templates for solving and generating examples
+generation_templates:
+  solve_template: |
+    I'll give you a task instruction and {questions_batch_size} questions. 
+    Please solve each question according to the instruction.
+    
+    Instruction:
+    {instruction}
+    
+    {answer_format}
+    
+    Questions:
+    {questions}
+
+  meta_sample_template: |
+    I'll give you a task description and some examples of different thinking styles.
+    Please generate {num_variations} different variations of the prompt instruction using these thinking styles.
+    
+    Task description:
+    {task_description}
+    
+    Examples of thinking styles:
+    {meta_prompts}
+    
+    Original prompt instruction:
+    {prompt_instruction}
+    
+    For each variation, provide the prompt instruction between <START> and <END> tags.
+
+  intent_template: |
+    I'll give you a task description and an instruction for solving it.
+    Please identify and list the key intent keywords that capture the essence of this task.
+    
+    Task description:
+    {task_description}
+    
+    Instruction:
+    {instruction}
+    
+    Please list 5-10 keywords that capture the intent of this task.
+
+  expert_template: |
+    I'll give you a task description. Please describe the profile of an expert who would be best suited to solve this task.
+    
+    Task description:
+    {task_description}
+    
+    Please provide a concise expert profile that highlights the key skills and knowledge needed for this task.
+
+# Templates for reasoning and optimization
+reasoning_templates:
+  generate_reason_template: |
+    I'll give you a task description, an instruction, a question, and the answer.
+    Please provide the reasoning that would lead to this answer.
+    
+    Task description:
+    {task_description}
+    
+    Instruction:
+    {instruction}
+    
+    Question:
+    {question}
+    
+    Answer:
+    {answer}
+    
+    Please provide a step-by-step reasoning process that leads to this answer.
+
+  reason_optimization_template: |
+    I'll give you a task description, an instruction, and some examples with reasoning.
+    Please analyze the reasoning and suggest how it could be optimized.
+    
+    Task description:
+    {task_description}
+    
+    Instruction:
+    {instruction}
+    
+    Examples with reasoning:
+    {examples}
+    
+    Please provide suggestions for optimizing the reasoning process.
+
+# Templates for example-based optimization
+example_templates:
+  examples_optimization_template: |
+    I'll give you a prompt, some examples, a critique of these examples, and a task description.
+    Please generate {num_examples} optimized examples that would better illustrate how to solve this task.
+    
+    Prompt:
+    {prompt}
+    
+    Current examples:
+    {examples}
+    
+    Ground truth example format:
+    {gt_example}
+    
+    Critique of current examples:
+    {critique}
+    
+    Task description:
+    {task_description}
+    
+    Please generate {num_examples} optimized examples between <START> and <END> tags.
+    Each example should follow the format shown in the ground truth example.
+
+  examples_critique_template: |
+    I'll give you a prompt, some examples, and a task description.
+    Please critique the examples and suggest how they could be improved to better illustrate the task.
+    
+    Prompt:
+    {prompt}
+    
+    Examples:
+    {examples}
+    
+    Task description:
+    {task_description}
+    
+    Please provide a detailed critique of these examples, focusing on their clarity, relevance, and effectiveness.
+
+  examples_critique_template_zero_shot: |
+    I'll give you a task description and a prompt.
+    Please suggest what kinds of examples would be most helpful for illustrating this task.
+    
+    Task description:
+    {task_description}
+    
+    Prompt:
+    {prompt}
+    
+    Please describe the characteristics of effective examples for this task.
